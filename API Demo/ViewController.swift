@@ -21,7 +21,7 @@ class ViewController: UIViewController {
         
         if let place = placeTextField.text {
             
-            let url = URL(string: "http://api.openweathermap.org/data/2.5/weather?q="+place+"&appid= PLACE_YOUR_APP_KEY ")
+            let url = URL(string: ("http://api.openweathermap.org/data/2.5/weather?q="+place+"&appid= PLACE_YOUR_APP_ID ").replacingOccurrences(of: " ", with: "%20"))
             
             let task = URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, response, error) in
                 
@@ -75,6 +75,10 @@ class ViewController: UIViewController {
             })
             
             task.resume();
+        } else {
+            
+            self.detailedWeatherReport.text = "Couldn't find the weather for that city. Please Try Again!!!"
+            
         }
         
         
